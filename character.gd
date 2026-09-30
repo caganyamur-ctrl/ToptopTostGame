@@ -1,0 +1,118 @@
+extends CharacterBody2D
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+@export var speed := 500.0
+@export var ground_accel := 3000.0
+@export var air_accel := 1800.0
+@export var jump_velocity := -1000.0
+@export var jump_cut := 0.4          
+@export var dash_speed := 1200.0
+@export var dash_time := 0.2
+@export var coyote_time := 0.1
+@export var jump_buffer_time := 0.1
+
+@export var ghost_interval := 0.035 
+var _ghost_timer := 0.0
+
+var facing := 1                      
+var is_dashing := false
+var can_dash := true
+var dash_dir := Vector2.ZERO
+
+var _dash_timer := 0.0
+var _coyote := 0.0
+var _jump_buffer := 0.0
+
+
+func _physics_process(delta: float) -> void:
+	var dir_x := Input.get_axis("ui_left", "ui_right")
+	if dir_x != 0:
+		facing = int(sign(dir_x))
+
+	if is_on_floor():
+		_coyote = coyote_time
+		if not is_dashing and not can_dash:
+			can_dash = true
+			_set_grayscale(false)
+	else:
+		_coyote -= delta
+
+	_jump_buffer -= delta
+	if Input.is_action_just_pressed("jump"):
+		_jump_buffer = jump_buffer_time
+
+	if Input.is_action_just_pressed("dash") and can_dash and not is_dashing:
+		_start_dash()
+
+	if is_dashing:
+		_dash_timer -= delta
+		velocity = dash_dir * dash_speed
+		
+		_ghost_timer -= delta
+		if _ghost_timer <= 0.0:
+			_spawn_ghost()
+			_ghost_timer = ghost_interval
+			
+		if _dash_timer <= 0.0:
+			is_dashing = false
+			velocity = dash_dir * speed   
+	else:
+		if not is_on_floor():
+			velocity += get_gravity() * delta * 2
+
+		if _jump_buffer > 0.0 and _coyote > 0.0:
+			velocity.y = jump_velocity
+			_jump_buffer = 0.0
+			_coyote = 0.0
+		if Input.is_action_just_released("jump") and velocity.y < 0.0:
+			velocity.y *= jump_cut
+
+		var accel := ground_accel if is_on_floor() else air_accel
+		velocity.x = move_toward(velocity.x, dir_x * speed, accel * delta)
+
+	move_and_slide()
+
+func _start_dash() -> void:
+	var x := Input.get_axis("ui_left", "ui_right")
+	var up := Input.is_action_pressed("ui_up")
+
+	dash_dir = Vector2(x, -1.0 if up else 0.0)
+	if dash_dir == Vector2.ZERO:
+		dash_dir = Vector2(facing, 0)
+	dash_dir = dash_dir.normalized()
+
+	is_dashing = true
+	can_dash = false
+	_dash_timer = dash_time
+	_ghost_timer = 0.0
+
+	_set_grayscale(true)
+
+func _set_grayscale(active: bool) -> void:
+	if sprite.material is ShaderMaterial:
+		sprite.material.set_shader_parameter("grayscale_amount", 1.0 if active else 0.0)
+
+func _spawn_ghost() -> void:
+	var ghost := AnimatedSprite2D.new()
+	ghost.sprite_frames = sprite.sprite_frames
+	ghost.animation = sprite.animation
+	ghost.frame = sprite.frame
+	ghost.flip_h = sprite.flip_h
+	ghost.scale = sprite.global_scale
+	ghost.global_position = sprite.global_position
+	
+	ghost.top_level = true
+	ghost.z_index = 1  
+	
+	if sprite.material:
+		ghost.material = sprite.material.duplicate()
+		(ghost.material as ShaderMaterial).set_shader_parameter("grayscale_amount", 1.0)
+	
+	ghost.modulate = Color(1.0, 1.0, 1.0, 0.5)
+	
+	add_child(ghost)
+	
+	var tween := create_tween()
+	tween.tween_property(ghost, "modulate:a", 0.0, 0.2)
+	tween.tween_callback(ghost.queue_free)
