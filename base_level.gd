@@ -3,6 +3,7 @@ extends Node2D
 @onready var control: Control = $Control
 @onready var container: VBoxContainer = $Control/VBoxContainer
 @onready var continue_btn: Button = $Control/VBoxContainer/Continue
+@onready var line_edit: LineEdit = $Control/VBoxContainer/HBoxContainer/LineEdit
 
 
 func _ready() -> void:
@@ -37,6 +38,7 @@ func _on_new_run_pressed() -> void:
 	get_tree().paused = false
 	GameManager.reset_timer()
 	get_tree().change_scene_to_file("res://sample_level.tscn")
+	GameManager.player_name = line_edit.text.strip_edges()
 
 
 func _on_leaderboard_pressed() -> void:

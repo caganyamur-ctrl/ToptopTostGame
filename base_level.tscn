@@ -15522,7 +15522,6 @@ text = "00:00"
 script = ExtResource("4_3o4py")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1147362603]
-visible = false
 layout_mode = 0
 offset_left = -352.99997
 offset_top = 102.00001
@@ -15530,9 +15529,16 @@ offset_right = -244.99997
 offset_bottom = 203.0
 scale = Vector2(7.3434796, 6.1126924)
 
-[node name="NewRun" type="Button" parent="Control/VBoxContainer" unique_id=611200326]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer" unique_id=737952737]
+layout_mode = 2
+
+[node name="NewRun" type="Button" parent="Control/VBoxContainer/HBoxContainer" unique_id=611200326]
 layout_mode = 2
 text = "New Run"
+
+[node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer/HBoxContainer" unique_id=487420853]
+layout_mode = 2
+placeholder_text = "Name"
 
 [node name="Continue" type="Button" parent="Control/VBoxContainer" unique_id=64070449]
 layout_mode = 2
@@ -15543,6 +15549,6 @@ layout_mode = 2
 text = "Leaderboard
 "
 
-[connection signal="pressed" from="Control/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
