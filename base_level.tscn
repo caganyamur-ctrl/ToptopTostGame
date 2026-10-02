@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://buq7iiheqg6s0" path="res://Backround_assests.png" id="1_5vx1e"]
 [ext_resource type="Texture2D" uid="uid://cipjg8xbx2006" path="res://assetsheet.png" id="1_bo3yr"]
 [ext_resource type="PackedScene" uid="uid://dcbrsufg6qrsk" path="res://character.tscn" id="1_eesb3"]
+[ext_resource type="Script" uid="uid://bxcdglio4akxu" path="res://base_level.gd" id="1_ftfrf"]
 [ext_resource type="Script" uid="uid://ds02ib5nh84ce" path="res://rich_text_label.gd" id="4_3o4py"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eesb3"]
@@ -15490,6 +15491,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5vx1e")
 
 [node name="BaseLevel" type="Node2D" unique_id=1431919195]
+script = ExtResource("1_ftfrf")
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="." unique_id=1209021657]
 tile_set = SubResource("TileSet_eesb3")
@@ -15518,3 +15520,29 @@ offset_bottom = 52.0
 theme_override_font_sizes/normal_font_size = 50
 text = "00:00"
 script = ExtResource("4_3o4py")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1147362603]
+visible = false
+layout_mode = 0
+offset_left = -352.99997
+offset_top = 102.00001
+offset_right = -244.99997
+offset_bottom = 203.0
+scale = Vector2(7.3434796, 6.1126924)
+
+[node name="NewRun" type="Button" parent="Control/VBoxContainer" unique_id=611200326]
+layout_mode = 2
+text = "New Run"
+
+[node name="Continue" type="Button" parent="Control/VBoxContainer" unique_id=64070449]
+layout_mode = 2
+text = "Continue"
+
+[node name="Leaderboard" type="Button" parent="Control/VBoxContainer" unique_id=1230062133]
+layout_mode = 2
+text = "Leaderboard
+"
+
+[connection signal="pressed" from="Control/VBoxContainer/NewRun" to="." method="_on_new_run_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
