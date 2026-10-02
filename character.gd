@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@export var jump_velocity: float = -950.0
+@export var var_jump_time: float = 0.16
+
+var _var_jump_timer: float = 0.0
+@export var joystick_deadzone := 0.25 
 
 @export var speed := 500.0
 @export var ground_accel := 3000.0
 @export var air_accel := 1800.0
-@export var jump_velocity := -1000.0
-@export var jump_cut := 0.4          
+#   
 @export var dash_speed := 1200.0
 @export var dash_time := 0.2
 @export var coyote_time := 0.1
@@ -26,9 +30,12 @@ var _jump_buffer := 0.0
 
 
 func _physics_process(delta: float) -> void:
-	var dir_x := Input.get_axis("ui_left", "ui_right")
-	if dir_x != 0:
-		facing = int(sign(dir_x))
+	var raw_x := Input.get_axis("ui_left", "ui_right")
+	var dir_x := 0.0
+	
+	if abs(raw_x) > joystick_deadzone:
+		dir_x = sign(raw_x)
+		facing = int(dir_x)
 
 	if is_on_floor():
 		_coyote = coyote_time
@@ -58,24 +65,40 @@ func _physics_process(delta: float) -> void:
 			is_dashing = false
 			velocity = dash_dir * speed   
 	else:
-		if not is_on_floor():
-			velocity += get_gravity() * delta * 2
-
+		# 1. Zıplama Girdisi (Buffer & Coyote kontrolü)
 		if _jump_buffer > 0.0 and _coyote > 0.0:
 			velocity.y = jump_velocity
+			_var_jump_timer = var_jump_time
 			_jump_buffer = 0.0
 			_coyote = 0.0
-		if Input.is_action_just_released("jump") and velocity.y < 0.0:
-			velocity.y *= jump_cut
 
-		var accel := ground_accel if is_on_floor() else air_accel
+		# 2. Celeste 'varJump' Mantığı
+		if _var_jump_timer > 0.0:
+			_var_jump_timer -= delta
+			if Input.is_action_pressed("jump"):
+				# Tuş basılı tutulduğu sürece dikey hızı korur (yerçekimini bastırır)
+				velocity.y = jump_velocity
+			else:
+				# Tuş erken bırakıldığında zamanlayıcıyı anında keser
+				_var_jump_timer = 0.0
+
+		# 3. Yerçekimi Uygulaması
+		if not is_on_floor():
+			# varJump süresince hız sabit tutulduğu için yerçekimi sadece tuş bırakıldığında 
+			# veya süre dolduğunda etkili olmaya başlar.
+			velocity += get_gravity() * delta * 2.0
+
+		# Yatay Hareket
+		var accel: float = ground_accel if is_on_floor() else air_accel
 		velocity.x = move_toward(velocity.x, dir_x * speed, accel * delta)
 
 	move_and_slide()
 
 func _start_dash() -> void:
-	var x := Input.get_axis("ui_left", "ui_right")
-	var up := Input.is_action_pressed("ui_up")
+	var raw_x := Input.get_axis("ui_left", "ui_right")
+	var x: float = signf(raw_x) if abs(raw_x) > joystick_deadzone else 0.0
+	
+	var up := Input.is_action_pressed("ui_up") or Input.get_axis("ui_down", "ui_up") > joystick_deadzone
 
 	dash_dir = Vector2(x, -1.0 if up else 0.0)
 	if dash_dir == Vector2.ZERO:
