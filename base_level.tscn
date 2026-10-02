@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://buq7iiheqg6s0" path="res://Backround_assests.png" id="1_5vx1e"]
 [ext_resource type="Texture2D" uid="uid://cipjg8xbx2006" path="res://assetsheet.png" id="1_bo3yr"]
 [ext_resource type="PackedScene" uid="uid://dcbrsufg6qrsk" path="res://character.tscn" id="1_eesb3"]
+[ext_resource type="Script" uid="uid://ds02ib5nh84ce" path="res://rich_text_label.gd" id="4_3o4py"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eesb3"]
 texture = ExtResource("1_5vx1e")
@@ -15508,8 +15509,12 @@ offset_top = 93.0
 offset_right = 1074.0
 offset_bottom = 133.0
 
-[node name="TextEdit" type="TextEdit" parent="Control" unique_id=837191537]
+[node name="RichTextLabel" type="RichTextLabel" parent="Control" unique_id=1254849139]
 layout_mode = 0
-offset_right = 152.0
-offset_bottom = 32.0
-text = "Gecen Sure: XX:XX"
+offset_left = -64.0
+offset_top = -20.0
+offset_right = 83.0
+offset_bottom = 52.0
+theme_override_font_sizes/normal_font_size = 50
+text = "00:00"
+script = ExtResource("4_3o4py")
