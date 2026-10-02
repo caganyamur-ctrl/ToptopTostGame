@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://ih6qltlbuhf0"]
 
-[ext_resource type="Texture2D" uid="uid://buq7iiheqg6s0" path="res://Backround_assests.png" id="1_5vx1e"]
-[ext_resource type="Texture2D" uid="uid://cipjg8xbx2006" path="res://assetsheet.png" id="1_bo3yr"]
-[ext_resource type="PackedScene" uid="uid://dcbrsufg6qrsk" path="res://character.tscn" id="1_eesb3"]
-[ext_resource type="Script" uid="uid://bxcdglio4akxu" path="res://base_level.gd" id="1_ftfrf"]
-[ext_resource type="Script" uid="uid://ds02ib5nh84ce" path="res://rich_text_label.gd" id="4_3o4py"]
+[ext_resource type="Texture2D" uid="uid://buq7iiheqg6s0" path="res://Assets/Backround_assests.png" id="1_5vx1e"]
+[ext_resource type="Texture2D" uid="uid://cipjg8xbx2006" path="res://Assets/assetsheet.png" id="1_bo3yr"]
+[ext_resource type="PackedScene" uid="uid://dcbrsufg6qrsk" path="res://Character/character.tscn" id="1_eesb3"]
+[ext_resource type="Script" uid="uid://bxcdglio4akxu" path="res://Level/base_level.gd" id="1_ftfrf"]
+[ext_resource type="Script" uid="uid://ds02ib5nh84ce" path="res://Level/rich_text_label.gd" id="4_3o4py"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eesb3"]
 texture = ExtResource("1_5vx1e")

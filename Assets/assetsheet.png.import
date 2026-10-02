@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ncjyyubftjyh"
-path="res://.godot/imported/parkurcu_jump.png-f5033c193c835c4876a862562b8626c7.ctex"
+uid="uid://cipjg8xbx2006"
+path="res://.godot/imported/assetsheet.png-d7117d6d90de4605a00311141acd1e8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://parkurcu_jump.png"
-dest_files=["res://.godot/imported/parkurcu_jump.png-f5033c193c835c4876a862562b8626c7.ctex"]
+source_file="res://Assets/assetsheet.png"
+dest_files=["res://.godot/imported/assetsheet.png-d7117d6d90de4605a00311141acd1e8f.ctex"]
 
 [params]
 

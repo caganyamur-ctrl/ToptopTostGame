@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dcbrsufg6qrsk"]
 
-[ext_resource type="Texture2D" uid="uid://nlrtspqggwmd" path="res://parkurcu_idle.png" id="1_wa5vi"]
-[ext_resource type="Script" uid="uid://pw4tvn04xh2p" path="res://character.gd" id="1_wfnr8"]
-[ext_resource type="Shader" uid="uid://x8xsub27756n" path="res://character.gdshader" id="2_0qfo5"]
-[ext_resource type="Texture2D" uid="uid://ncjyyubftjyh" path="res://parkurcu_jump.png" id="2_wfnr8"]
-[ext_resource type="Texture2D" uid="uid://dxwxotd128vv" path="res://parkurcu_running.png" id="3_px5sl"]
-[ext_resource type="Script" uid="uid://cypap08qgsgg6" path="res://animate.gd" id="5_px5sl"]
+[ext_resource type="Texture2D" uid="uid://nlrtspqggwmd" path="res://Assets/parkurcu_idle.png" id="1_wa5vi"]
+[ext_resource type="Script" uid="uid://pw4tvn04xh2p" path="res://Character/character.gd" id="1_wfnr8"]
+[ext_resource type="Shader" uid="uid://x8xsub27756n" path="res://Character/character.gdshader" id="2_0qfo5"]
+[ext_resource type="Texture2D" uid="uid://ncjyyubftjyh" path="res://Assets/parkurcu_jump.png" id="2_wfnr8"]
+[ext_resource type="Texture2D" uid="uid://dxwxotd128vv" path="res://Assets/parkurcu_running.png" id="3_px5sl"]
+[ext_resource type="Script" uid="uid://cypap08qgsgg6" path="res://Character/animate.gd" id="5_px5sl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qfo5"]
 shader = ExtResource("2_0qfo5")

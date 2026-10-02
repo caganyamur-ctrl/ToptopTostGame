@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhbmcm4njtj8a"]
 
-[ext_resource type="PackedScene" uid="uid://bqf5ckw75fn22" path="res://sample_level.tscn" id="1_y0xe8"]
+[ext_resource type="PackedScene" uid="uid://bqf5ckw75fn22" path="res://Level/sample_level.tscn" id="1_y0xe8"]
 
 [node name="BaseLevel" unique_id=1431919195 instance=ExtResource("1_y0xe8")]
 

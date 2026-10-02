@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxwxotd128vv"
-path="res://.godot/imported/parkurcu_running.png-a6b5b90e40c4469d680b6f06bb5b0264.ctex"
+path="res://.godot/imported/parkurcu_running.png-ac8ad79dbb371acf360eafda78bedcdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://parkurcu_running.png"
-dest_files=["res://.godot/imported/parkurcu_running.png-a6b5b90e40c4469d680b6f06bb5b0264.ctex"]
+source_file="res://Assets/parkurcu_running.png"
+dest_files=["res://.godot/imported/parkurcu_running.png-ac8ad79dbb371acf360eafda78bedcdb.ctex"]
 
 [params]
 

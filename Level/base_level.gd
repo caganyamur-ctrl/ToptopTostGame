@@ -37,10 +37,10 @@ func _on_continue_pressed() -> void:
 func _on_new_run_pressed() -> void:
 	get_tree().paused = false
 	GameManager.reset_timer()
-	get_tree().change_scene_to_file("res://sample_level.tscn")
+	get_tree().change_scene_to_file("res://Level/sample_level.tscn")
 	GameManager.player_name = line_edit.text.strip_edges()
 
 
 func _on_leaderboard_pressed() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://level2.tscn")
+	get_tree().change_scene_to_file("res://Level/level2.tscn")
